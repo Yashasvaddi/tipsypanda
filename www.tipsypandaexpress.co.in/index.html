@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipsy Panda — Premium Chinese Dining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2a1f1d;
+            --accent: #c19a6b;
+            --accent-dark: #8b6b47;
+            --accent-light: #d4b896;
+            --text: #e8e0d9;
+            --text-muted: #a89f95;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --overlay: rgba(0, 0, 0, 0.7);
+            --radius: 8px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(193, 154, 107, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(193, 154, 107, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Header - Fixed with proper spacing */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            color: var(--primary);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section - Fixed padding to prevent overlap */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px; /* Added to prevent header overlap */
+        }
+
+        .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
+                    url('assets/images/gallery/f1.jpeg');
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+        }
+
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 40px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(193, 154, 107, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            padding-right: 40px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Directors Section */
+        #directors {
+            background: var(--primary);
+            position: relative;
+        }
+
+        .directors-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .director-card {
+            background: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .director-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .director-image {
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .director-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .director-card:hover .director-image img {
+            transform: scale(1.1);
+        }
+
+        .director-content {
+            padding: 30px;
+        }
+
+        .director-name {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .director-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .director-bio {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+
+        /* Vision Section */
+        #vision {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets\images\gallery\4.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+            position: relative;
+        }
+
+        .vision-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vision-text {
+            font-size: 1.3rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Gallery Section */
+        #gallery {
+            background: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-container {
+            position: relative;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit:fill;
+            transition: var(--transition);
+        }
+
+        .swiper-slide:hover img {
+            transform: scale(1.05);
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--accent);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--primary);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(193, 154, 107, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .contact-details p {
+            color: var(--text-muted);
+        }
+
+        .contact-form {
+            background: var(--secondary);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 80px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-about {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(37, 211, 102, 0.8);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .about-container,
+            .contact-container {
+                gap: 50px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content {
+                padding-right: 0;
+            }
+            
+            .directors-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--secondary);
+                flex-direction: column;
+                padding: 30px;
+                gap: 0;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 99;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            nav ul li {
+                width: 100%;
+            }
+            
+            nav a {
+                display: block;
+                padding: 15px;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .directors-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919518393810" target="_blank">
+            <i class="fab fa-whatsapp fa-lg"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets\images\logo1.jpeg" alt="Tipsy Panda Logo" class="logo-img">
+                <div class="logo-text">Tipsy <span>Panda</span></div>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#directors">Directors</a></li>
+                    <li><a href="#vision">Vision</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact" class="nav-cta">Reservations</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <span class="hero-eyebrow">PREMIUM CHINESE DINING</span>
+                <h1 class="hero-title">Where Culinary Art Meets Timeless Tradition</h1>
+                <p class="hero-subtitle">An elevated modern Chinese dining experience — bold flavours, shareable plates & a warm lantern-lit vibe. We keep all original photos and gallery content unchanged for authenticity.</p>
+                
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="location.href='#contact'">
+                        <i class="far fa-calendar-check"></i>
+                        Book a Table
+                    </button>
+                    <a href="assets\images\menu.pdf" class="btn btn-secondary">
+                        <i class="fas fa-download"></i>
+                        View Menu
+                    </a>
+                </div>
+                
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="feature-text">3 Locations in Vasai & Virar</div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="feature-text">Open Daily • Dine-in & Delivery</div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="feature-text">Established in 2017</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Our Story</h2>
+                <p class="section-subtitle">A journey of flavor, passion, and culinary excellence</p>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-image fade-in">
+                    <img src="assets\images\13.jpeg" alt="About Tipsy Panda">
+                </div>
+                <div class="about-content fade-in">
+                    <p class="about-text">Tipsy Panda was established in 2017 in Virar (Northern Mumbai Suburb) and since then has made a name in the local food and beverage scene. Known for its varied offerings of Indo-Chinese inspired dishes, Tipsy Panda is a go-to name in almost all households when it comes to taste, hygiene, consistency, customer service and affordability.</p>
+                    
+                    <p class="about-text">Tipsy Panda now has 3 successfully running restaurants in Vasai(West), Vasai(East) and Virar(West). The brand Tipsy Panda is ready to expand its wings with the launch of the cloud kitchen franchise model "Tipsy Panda Express".</p>
+                    
+                    <div style="margin-top: 40px;">
+                        <a href="#">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-book-open"></i>
+                                Explore Our Menu
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-text">Years of Excellence</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">3</div>
+                            <div class="stat-text">Restaurants</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-text">Signature Dishes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directors Section -->
+    <section id="directors">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Our Directors</h2>
+                <p class="section-subtitle">The passionate minds behind our culinary excellence</p>
+            </div>
+            
+            <div class="directors-container">
+                <!-- Director 1 -->
+                <div class="director-card fade-in">
+                    <div class="director-image">
+                        <img src="assets\images\kameles.jpeg" alt="Kamlesh Patil">
+                    </div>
+                    <div class="director-content">
+                        <h3 class="director-name">Kamlesh Patil</h3>
+                        <p class="director-role">Director</p>
+                        <p class="director-bio">Having started his career in the most prestigious hotel groups in India, Kamlesh has learnt hospitality the "TAJ" way. With 23 years of rich experience he brings warmth, care and pure passion to the brand.</p>
+                        <div id="more-kamlesh" style="display: none;">
+                            <p class="director-bio">Kamlesh started his career at The Taj president in 2001, worked on P & O Cruises for 10 years and later joined Indigo Delicatessen. Since 2019 he began his entrepreneurial journey with Tipsy Panda Asian Kitchen + Bar in Vasai.</p>
+                        </div>
+                        <a class="read-more" onclick="toggleText('more-kamlesh', this)">
+                            <span>Read more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Director 2 -->
+                <div class="director-card fade-in">
+                    <div class="director-image">
+                        <img src="assets\images\sanya.jpeg" alt="Sanyo Vaz">
+                    </div>
+                    <div class="director-content">
+                        <h3 class="director-name">Sanyo Vaz</h3>
+                        <p class="director-role">Director</p>
+                        <p class="director-bio">Sanyo brings 17 years of rich culinary experience and guides the brand to consistently evolve with our food. He has international experience with Marriott & other global brands.</p>
+                        <div id="more-sanyo" style="display: none;">
+                            <p class="director-bio">Sanyo worked with The Ritz London, Marriott in the USA and helped set up steakhouse brands in Canada before returning to India.</p>
+                        </div>
+                        <a class="read-more" onclick="toggleText('more-sanyo', this)">
+                            <span>Read more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Director 3 -->
+                <div class="director-card fade-in">
+                    <div class="director-image">
+                        <img src="assets\images\joel.jpeg" alt="Joel Lopes">
+                    </div>
+                    <div class="director-content">
+                        <h3 class="director-name">Joel Lopes</h3>
+                        <p class="director-role">Director</p>
+                        <p class="director-bio">Joel started his career at The Oberoi and later spent 15 years with Norwegian cruise lines. He joined Tipsy Panda in 2021 bringing expertise in hospitality and administration.</p>
+                        <div id="more-joel" style="display: none;">
+                            <p class="director-bio">Joel honed basics at Oberoi and then grew with Norwegian cruise lines before moving into entrepreneurship.</p>
+                        </div>
+                        <a class="read-more" onclick="toggleText('more-joel', this)">
+                            <span>Read more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Brand Vision</h2>
+                <p class="section-subtitle">Our commitment to culinary excellence and expansion</p>
+            </div>
+            
+            <div class="vision-content fade-in">
+                <p class="vision-text">To expand responsibly across Mumbai, Navi Mumbai, Thane and Pune in an initial expansion plan — creating a trustworthy dine-in / cloud-kitchen brand by continuing to build a loyal customer base while preserving the taste & traditions of Tipsy Panda. Master franchise plans for existing partners will be introduced.</p>
+                
+                <div style="margin-top: 40px;">
+                    <a href="assets\images\FRANCHISE_DETAILS.pdf">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download Franchise Details
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-subtitle">A visual journey through our culinary creations</p>
+            </div>
+            
+            <div class="gallery-container fade-in">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="assets\images\gallery\1.jpeg" alt="Gallery Image 1"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\2.jpeg" alt="Gallery Image 2"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\3.jpeg" alt="Gallery Image 3"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\4.jpeg" alt="Gallery Image 4"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\5.jpeg" alt="Gallery Image 5"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\6.jpeg" alt="Gallery Image 6"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\7.jpeg" alt="Gallery Image 7"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\8.jpeg" alt="Gallery Image 8"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f.jpeg" alt="Gallery Image f"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f1.jpeg" alt="Gallery Image f1"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f3.jpeg" alt="Gallery Image f3"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f4.jpeg" alt="Gallery Image f4"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f5.jpeg" alt="Gallery Image f5"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f6.jpeg" alt="Gallery Image f6"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f7.jpeg" alt="Gallery Image f7"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f8.jpeg" alt="Gallery Image f8"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f9.jpeg" alt="Gallery Image f9"></div>
+                        <div class="swiper-slide"><img src="assets\images\gallery\f10.jpeg" alt="Gallery Image f10"></div>
+                    </div>
+                    
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Reservations</h2>
+                <p class="section-subtitle">Book your table for an unforgettable dining experience</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Locations</h3>
+                            <p>Vasai (West), Vasai (East), Virar (West)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 9518393810</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>tipsypandaexpress@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Opening Hours</h3>
+                            <p>Monday - Sunday: 11:00 AM - 11:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in">
+                    <form action="https://formsubmit.co/tipsypandaexpress@gmail.com" method="POST">
+                        <input type="hidden" name="_next" value="https://tipsypandaexpress.co.in">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" class="form-control" name="phone" placeholder="Phone Number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="far fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="assets\images\logo1.jpeg" alt="Tipsy Panda Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">Tipsy Panda</div>
+                    </div>
+                    <p class="footer-about">An elevated modern Chinese dining experience with bold flavours, shareable plates & a warm lantern-lit vibe. Established in 2017 with locations across Vasai and Virar.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100057269776813&mibextid=ZbWKwL" class="social-link" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com/tipsypandavasai?igshid=YmMyMTA2M2Y=" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://g.co/kgs/EKqnJt" class="social-link" target="_blank">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#directors">Our Directors</a></li>
+                        <li><a href="#vision">Brand Vision</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Our Menu</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Appetizers</a></li>
+                        <li><a href="#">Main Course</a></li>
+                        <li><a href="#">Rice & Noodles</a></li>
+                        <li><a href="#">Soups</a></li>
+                        <li><a href="#">Desserts</a></li>
+                        <li><a href="#">Beverages</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+919518393810"><i class="fas fa-phone-alt"></i> +91 9518393810</a></li>
+                        <li><a href="mailto:tipsypandaexpress@gmail.com"><i class="far fa-envelope"></i> tipsypandaexpress@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Vasai & Virar Locations</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Tipsy Panda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Reveal on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeObserver.observe(element);
+        });
+        
+        // Read more toggle
+        function toggleText(id, element) {
+            const moreText = document.getElementById(id);
+            if (moreText.style.display === 'none') {
+                moreText.style.display = 'block';
+                element.querySelector('span').textContent = 'Read less';
+                element.querySelector('i').classList.remove('fa-chevron-down');
+                element.querySelector('i').classList.add('fa-chevron-up');
+            } else {
+                moreText.style.display = 'none';
+                element.querySelector('span').textContent = 'Read more';
+                element.querySelector('i').classList.remove('fa-chevron-up');
+                element.querySelector('i').classList.add('fa-chevron-down');
+            }
+        }
+        
+        // Initialize Swiper
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+            speed: 800,
+        });
+    </script>
+</body>
+</html>
